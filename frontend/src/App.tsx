@@ -17,6 +17,8 @@ function App() {
     }).then((response) => {
       console.log(response)
       setResponse(response.data.message)
+    }).catch((err) => {
+      setResponse(err.response?.data.message);
     })
   }
 
@@ -26,7 +28,9 @@ function App() {
       password: password,
     }).then((response) => {
       console.log(response)
-      setResponse(response.data.currentUser.username)
+      setResponse(response.data.currentUser.username);
+    }).catch((err) => {
+      setResponse(err.response?.data.message);
     })
   }
 
