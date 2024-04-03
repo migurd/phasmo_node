@@ -1,33 +1,85 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [usernameReg, setUsernameReg] = useState("")
+  const [passwordReg, setPasswordReg] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+
+  const [response, setResponse] = useState("")
+
+  const register = () => {
+    axios.post('http://localhost:3000/user/register', {
+      username: usernameReg,
+      password: passwordReg,
+    }).then((response) => {
+      console.log(response)
+      setResponse(response.data.message)
+    })
+  }
+
+  const login = () => {
+    axios.post('http://localhost:3000/user/login', {
+      username: username,
+      password: password,
+    }).then((response) => {
+      console.log(response)
+      setResponse(response.data.currentUser.username)
+    })
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="App">
+        <div className="registration">
+          <h1>Registraton</h1>
+          <label htmlFor="usernameReg">Username</label>
+          <input
+            type="text"
+            id="usernameReg"
+            onChange={(e) => {
+              setUsernameReg(e.target.value)
+            }}
+          />
+          <label htmlFor="passwordReg">Password</label>
+          <input
+            type="text"
+            id="passwordReg"
+            onChange={(e) => {
+              setPasswordReg(e.target.value)
+            }}
+          />
+          <button onClick={register}>
+            Register
+          </button>
+        </div>
+
+        <div className="login">
+          <h1>Login</h1>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            onChange={(e) => {
+              setUsername(e.target.value)
+            }}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="text"
+            id="password"
+            onChange={(e) => {
+              setPassword(e.target.value)
+            }}
+          />
+          <button onClick={login}>
+            Login
+          </button>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p>{response}</p>
     </>
   )
 }
