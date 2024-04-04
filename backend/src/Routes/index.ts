@@ -40,7 +40,7 @@ router.post('/user/register', async (req, res) => {
 });
 
 // Login
-router.post('/user/login', async (req, res) => {
+router.post('/user/login', async (req: any, res: any) => {
   let currentUser: UserReg;
 
   try {
@@ -49,10 +49,23 @@ router.post('/user/login', async (req, res) => {
       password: req.body.password
     }
     const userFound = await user_db.login(currentUser);
-    res.status(200).json({ success: true, message: "OK", currentUser: userFound });
+
+    req.session.user = userFound;
+    console.log(req.session.user);
+
+    res.status(200).json({ success: true, message: "OK", user: userFound });
   }
   catch (err: any) {
     console.error(`Error ocurred: ${err.message}`);
     res.status(400).json({ success: false, message: err.message });
+  }
+});
+
+// Verify if user is logged in
+router.get('/user/login', (req: any, res: any) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user })
+  } else {
+    res.send({ loggedIn: false })
   }
 });

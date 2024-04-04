@@ -1,0 +1,4 @@
+- Routes
+- Protected routes
+- Views
+- Insert info from backend

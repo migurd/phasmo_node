@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 
@@ -10,6 +10,8 @@ function App() {
 
   const [response, setResponse] = useState("")
 
+  axios.defaults.withCredentials = true;
+
   const register = () => {
     axios.post('http://localhost:3000/user/register', {
       username: usernameReg,
@@ -18,7 +20,7 @@ function App() {
       console.log(response)
       setResponse(response.data.message)
     }).catch((err) => {
-      setResponse(err.response?.data.message);
+      setResponse(err.response?.data.message)
     })
   }
 
@@ -28,11 +30,20 @@ function App() {
       password: password,
     }).then((response) => {
       console.log(response)
-      setResponse(response.data.currentUser.username);
+      setResponse(response.data.currentUser.username)
     }).catch((err) => {
-      setResponse(err.response?.data.message);
+      setResponse(err.response?.data.message)
     })
   }
+
+  // useEffect is going to be run every time the page runs
+  useEffect(() => {
+    axios.get("http://localhost:3000/user/login").then((response) => {
+      if (response.data.loggedIn)
+        setResponse(response.data.user.username);
+      else setResponse("Log in, please")
+    });
+  }, []);
 
   return (
     <>
