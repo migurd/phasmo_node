@@ -70,24 +70,22 @@ export const ghost_db = {
     return new Promise((resolve, reject) => {
       // query
       const sqlQuery = `
-        SELECT
-          g.id_ghost as id_ghost,
-          g.name as ghost_name,
-          g.pic as ghost_pic,
-          COALESCE(SUM(ug.isFound), 0) AS found_count,
-          COALESCE(SUM(ug.isDiscovered), 0) AS discovered_count,
-          COALESCE(SUM(ug.isDead), 0) AS dead_count
-        FROM
-          ghost g
-        LEFT JOIN
-          user_has_ghost ug ON g.id_ghost = ug.ghost_id_ghost
-        LEFT JOIN
+      SELECT
+        g.id_ghost as id_ghost,
+        g.name as ghost_name,
+        g.pic as ghost_pic,
+        COALESCE(SUM(ug.isFound), 0) AS found_count,
+        COALESCE(SUM(ug.isDiscovered), 0) AS discovered_count,
+        COALESCE(SUM(ug.isDead), 0) AS dead_count
+      FROM
+        ghost g
+      LEFT JOIN
+          user_has_ghost ug ON g.id_ghost = ug.ghost_id_ghost and ug.user_id_user = ?
+      LEFT JOIN
           user u on u.id_user = ug.user_id_user
-        WHERE
-          u.id_user = ? OR u.id_user IS NULL
-        GROUP BY
-          ghost_name
-        ORDER BY
+      GROUP BY
+          id_ghost, g.name, g.pic
+      ORDER BY
           id_ghost;
       `;
 

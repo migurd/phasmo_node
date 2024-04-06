@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "../Decoration/Button/Button";
 import './Login.css'
 import Alert from "../Decoration/Alert/Alert";
+import { login } from '../../consumers/UserApi'
 
 export default function Login() {
   const [username, setUsername] = useState("")
@@ -12,18 +13,11 @@ export default function Login() {
   const [title, setTitle] = useState("")
   const [isVisible, setIsVisible] = useState(false)
 
-  const login = () => {
-    axios.post('http://localhost:3000/user/login', {
-      username: username,
-      password: password,
-    }).then((response) => {
-      console.log(response);
-      setTitle(`Welcome ${username}!`);
-      setMessage(`You've started a session successfully!`);
-      setIsVisible(true)
-    }).catch((err) => {
-      console.error(err.response?.data.message)
-    })
+  const btnLogin = async () => {
+    await login(username, password);
+    setTitle(`Welcome in, ${username}!`);
+    setMessage(`You've started a session successfully!`);
+    setIsVisible(true)
   }
 
   return(
@@ -54,8 +48,8 @@ export default function Login() {
             }}
           />
         </div>
-        <Button button={ { name: "Login", type: 3, onClick: login } } />
-        <Alert alert={ { depth: 1, title: title, message: message, isVisible: isVisible, onClick: () => { setIsVisible(false); window.location.href = '/'; } } } />
+        <Button button={ { name: "Login", type: 3, onClick: btnLogin } } />
+        <Alert alert={ { depth: 1, title: title, message: message, isVisible: isVisible, isReload: true, onClick: () => { setIsVisible(false); window.location.href = '/'; } } } />
       </div>
     </>
   )

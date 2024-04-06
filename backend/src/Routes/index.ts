@@ -86,11 +86,19 @@ router.get('/user/signout', (req: any, res: any) => {
 
 // *************************************
 // USER
+router.get('/user/getIdCurrentUser', (req: any, res: any) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, id_user: req.session.user.id_user })
+  } else {
+    res.send({ loggedIn: false })
+  }
+});
+
 router.get('/user/getUserInfo/:userId', async (req: any, res: any) => {
   try {
     const userId = req.params.userId;
     const retrieved_user = await user_db.getUser(userId); // Await the asynchronous operation
-    res.send({ retrieved_user });
+    res.send(retrieved_user);
   } catch (error) {
     // Handle errors properly
     console.error(error);

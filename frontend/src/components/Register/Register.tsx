@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import Button from "../Decoration/Button/Button";
 import Alert from "../Decoration/Alert/Alert";
+import { login, register } from '../../consumers/UserApi'
 
 export default function Register() {
   const [usernameReg, setUsernameReg] = useState("")
@@ -11,30 +12,11 @@ export default function Register() {
   const [title, setTitle] = useState("")
   const [isVisible, setIsVisible] = useState(false)
 
-  const register = () => {
-    axios.post('http://localhost:3000/user/register', {
-      username: usernameReg,
-      password: passwordReg,
-    }).then((response) => {
-      console.log(response?.data.message);
-      login();
-    }).catch((err) => {
-      console.error(err.response?.data.message)
-    })
-  }
-
-  const login = () => {
-    axios.post('http://localhost:3000/user/login', {
-      username: usernameReg,
-      password: passwordReg,
-    }).then((response) => {
-      console.log(response?.data.message);
-      setTitle(`Welcome ${usernameReg}!`);
-      setMessage(`Created account successfully. Starting session!`);
-      setIsVisible(true)
-    }).catch((err) => {
-      console.error(err.response?.data.message)
-    })
+  const btnRegister = async () => {
+    await register(usernameReg, passwordReg);
+    setTitle(`Welcome ${usernameReg}!`);
+    setMessage(`Created account successfully. Starting session!`);
+    setIsVisible(true)
   }
 
   return(
@@ -64,8 +46,8 @@ export default function Register() {
             }}
           />
         </div>
-        <Button button={ { name: "Register", type: 3, onClick: register } } />
-        <Alert alert={ { depth: 1, title: title, message: message, isVisible: isVisible, onClick: () => { setIsVisible(false); window.location.href = '/'; } } } />
+        <Button button={ { name: "Register", type: 3, onClick: btnRegister } } />
+        <Alert alert={ { depth: 1, title: title, message: message, isVisible: isVisible, isReload: true, onClick: () => { login(usernameReg, passwordReg); } } } />
       </div>
     </>
   )

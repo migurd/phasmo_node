@@ -1,4 +1,4 @@
-export default interface Statistic {
+export default interface IStatistic {
   id_ghost: number;
   ghost_name: string;
   ghost_pic: string;

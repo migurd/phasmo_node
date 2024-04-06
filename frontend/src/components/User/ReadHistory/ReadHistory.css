@@ -1,0 +1,27 @@
+#history {
+  height: 250px;
+  overflow-y: auto;
+}
+
+.statistics-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.statistics-table th, .statistics-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.statistics-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.statistics-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.statistics-table tr:hover {
+  background-color: #ddd;
+}

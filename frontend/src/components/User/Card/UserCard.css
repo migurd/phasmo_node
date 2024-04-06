@@ -1,0 +1,44 @@
+#userCard {
+  height: 160px;
+  width: 100%;
+  background-color: #E2D8D3;
+  background-image: url('/decoration/patterns/cube-pattern.png');
+  text-transform: uppercase;
+  box-shadow: 0px 0px 10px 0px black;
+  border-radius: 10px;
+}
+
+#userCard .container {
+  padding: 10px;
+  display: flex;
+}
+
+#userCard header {
+  display: grid;
+  place-items: center;
+  height: 30px;
+  background-color: #DFA63B;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+#userCard .pfp > img {
+  width: 70px;
+  border: 2px solid black;
+}
+
+#userCard .information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+}
+
+#userCard .information .title {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+#userCard .information .content {
+  font-size: 1.1rem;
+}
