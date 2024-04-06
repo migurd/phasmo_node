@@ -5,9 +5,10 @@ export interface UserReg {
   password: string;
 }
 
-export interface User extends UserReg {
+export interface IUser extends UserReg {
   id_user: number;
-  role: Role.user;
-  money: 0;
-  status: true;
+  role: Role;
+  money: number;
+  level: number;
+  status: number;
 }

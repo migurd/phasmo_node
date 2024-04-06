@@ -15,24 +15,24 @@ const session = require('express-session');
 
 // Middleware
 main.use(express.json());
+main.use(bodyParser.urlencoded({ extended: true }));
 main.use(cors({
   origin: ["http://localhost:5173"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
-main.use(cookieParser());
-main.use(bodyParser.urlencoded({ extended: true }));
 main.use(
   session({
     key: "userId",
     secret: "omaga",
     resave: false,
-    saveUnitialized: false,
+    saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 24,
+      expires: 60 * 60 * 24 * 1000,
     },
   })
 );
+main.use(cookieParser());
 main.use(router);
 
 // END

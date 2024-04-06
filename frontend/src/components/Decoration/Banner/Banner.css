@@ -1,0 +1,47 @@
+#banner {
+  display: none;
+  position: absolute;
+  top: calc(35px + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-position: left;
+  background-repeat: no-repeat;
+  height: 60px;
+  width: 374px;
+  
+  color: white;
+  font-weight: bold;
+  font-size: 1.4rem;
+  letter-spacing: 0.2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media screen and (min-width: 450px) {
+  #banner {
+    display: inline-block;
+    background-image: url('/decoration/tape_xs.png');
+    /* TITLE INSIDE BANNER */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  #banner {
+    background-image: url('/decoration/tape_s.png');
+    height: 60px;
+    width: 477px;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #banner {
+    background-image: url('/decoration/tape.png');
+    height: 60px;
+    width: 1123px;
+    font-size: 1.8rem;
+  }
+}

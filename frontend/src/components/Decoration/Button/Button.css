@@ -1,0 +1,40 @@
+#button {
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: left;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  width: min(80%, 400px);
+  height: 50px;
+
+  /* FONT */
+  font-weight: bold;
+  font-size: 1.4rem;
+
+  /*  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+}
+
+.button1 {
+  background-image: url('/decoration/btns/btn1.png');
+}
+.button2 {
+  background-image: url('/decoration/btns/btn2.png');
+}
+.button3 {
+  background-image: url('/decoration/btns/btn3.png');
+}
+.button4 {
+  background-image: url('/decoration/btns/btn4.png');
+}
+.button5 {
+  background-image: url('/decoration/btns/btn5.png');
+}
+.button6 {
+  background-image: url('/decoration/btns/btn6.png');
+}

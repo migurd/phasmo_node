@@ -1,102 +1,116 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+// FUNCTIONALITIES
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { Navigate, Route, Router, Routes, useRoutes } from 'react-router'
+import { Link } from 'react-router-dom'
+import { Role } from '../../backend/src/Models/enums'
+// MODULES
+import Login from './components/Login/Login'
+import Register from './components/Register/Register'
+import UserMenu from './components/User/UserMenu/UserMenu'
+import AdminMenu from './components/Admin/AdminMenu/AdminMenu'
+import Background from './components/Decoration/Background/Background'
+import Frame from './components/Decoration/Frame/Frame'
+import SheetLogin from './components/Decoration/Sheets/SheetLogin.tsx/SheetLogin'
+import Sheet from './Interfaces/Sheet'
+import Banner from './components/Decoration/Banner/Banner'
+// CSS
+import './App.css'
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+</style>
 
-function App() {
-  const [usernameReg, setUsernameReg] = useState("")
-  const [passwordReg, setPasswordReg] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+export default function App() {
 
-  const [response, setResponse] = useState("")
-
+  // When using axios, this is needed
   axios.defaults.withCredentials = true;
 
-  const register = () => {
-    axios.post('http://localhost:3000/user/register', {
-      username: usernameReg,
-      password: passwordReg,
-    }).then((response) => {
-      console.log(response)
-      setResponse(response.data.message)
-    }).catch((err) => {
-      setResponse(err.response?.data.message)
-    })
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<Role>(Role.notAsigned);
 
-  const login = () => {
-    axios.post('http://localhost:3000/user/login', {
-      username: username,
-      password: password,
-    }).then((response) => {
-      console.log(response)
-      setResponse(response.data.currentUser.username)
-    }).catch((err) => {
-      setResponse(err.response?.data.message)
-    })
-  }
-
-  // useEffect is going to be run every time the page runs
   useEffect(() => {
-    axios.get("http://localhost:3000/user/login").then((response) => {
-      if (response.data.loggedIn)
-        setResponse(response.data.user.username);
-      else setResponse("Log in, please")
-    });
+    const fetchUserRole = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/user/login");
+        if (response.data.loggedIn) {
+          setIsLoggedIn(true)
+          if (Role.admin === response.data.user.role) {
+            setUserRole(Role.admin);
+            console.log("When eres admin (╯‵□′)╯︵┻━┻");
+          } else {
+            setUserRole(Role.user);
+            console.log("When eres user :'v");
+          }
+        } else {
+          console.log("Log in, NOW!");
+        }
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
+    };
+
+    fetchUserRole();
   }, []);
 
-  return (
-    <>
-      <div className="App">
-        <div className="registration">
-          <h1>Registraton</h1>
-          <label htmlFor="usernameReg">Username</label>
-          <input
-            type="text"
-            id="usernameReg"
-            onChange={(e) => {
-              setUsernameReg(e.target.value)
-            }}
-          />
-          <label htmlFor="passwordReg">Password</label>
-          <input
-            type="text"
-            id="passwordReg"
-            onChange={(e) => {
-              setPasswordReg(e.target.value)
-            }}
-          />
-          <button onClick={register}>
-            Register
-          </button>
-        </div>
+  const loginSheets: Sheet[] = [
+    { title: "Login", path: "/login", element: <Login /> },
+    { title: "Register", path: "/register", element: <Register /> },
+  ]
 
-        <div className="login">
-          <h1>Login</h1>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            onChange={(e) => {
-              setUsername(e.target.value)
-            }}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            id="password"
-            onChange={(e) => {
-              setPassword(e.target.value)
-            }}
-          />
-          <button onClick={login}>
-            Login
-          </button>
-        </div>
-      </div>
-      <p>{response}</p>
-    </>
+  return (
+    <div className="App">
+      <Background />
+      <Frame />
+      <Routes>
+        {!isLoggedIn ? (
+          <>
+            <Route path='/' element={<Navigate to={'login'} />}></Route>
+            <Route path="login" element={
+              <>
+                <Banner title="PHASMOPHOBIA" /> 
+                <SheetLogin sheets={loginSheets} />
+              </>
+            }/>
+            <Route path="register" element={
+              <>
+                <Banner title="PHASMOPHOBIA" /> 
+                <SheetLogin sheets={loginSheets} />
+              </>
+            }/>
+            <Route path='*' element={<Navigate to={'/'} replace />}></Route>
+          </>
+        ) : (
+          userRole === Role.user ? (
+            <>
+              <Route path='/user'>
+                <Route path='/user/user_menu' element={
+                  <>
+                    <Banner title="USER PHASMO" />
+                    <UserMenu />
+                  </>
+                }></Route>
+              </Route>
+
+              <Route path="*" element={<Navigate to="/user/user_menu" replace />} />
+            </>
+          ) : (
+            <>
+              <Route path='/admin'>
+                <Route path='/admin/admin_menu' element={
+                  <>
+                  <Banner title="ADMIN PHASMO" />
+                  <AdminMenu />
+                  </>
+                }></Route>
+              </Route>
+
+              <Route path="*" element={<Navigate to="/admin/admin_menu" replace />} />
+            </>
+          )
+        )
+      }
+      {/* <Route path='*' element={<Navigate to="/login" />} /> */}
+    </Routes>
+    </div>
   )
 }
-
-export default App

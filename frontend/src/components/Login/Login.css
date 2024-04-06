@@ -1,0 +1,29 @@
+.login, .register {
+  margin-top: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff; /* Change the border color on focus */
+}
+
+.mb-3 {
+  margin-bottom: 10px;
+}

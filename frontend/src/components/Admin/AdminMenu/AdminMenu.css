@@ -1,0 +1,28 @@
+#buttonsAdmin {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 250px;
+}
+
+#buttonsAdmin > * {
+  width: 100%;
+  height: 70px;
+  font-size: 1.6rem;
+}
+
+@media screen and (min-width: 600px) {
+  #buttonsAdmin {
+    width: 500px;
+  }
+  
+  #buttonsAdmin > * {
+    justify-content: left;
+    padding-left: 60px;
+    font-size: 2.4rem;
+  }
+}

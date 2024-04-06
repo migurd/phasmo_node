@@ -1,0 +1,99 @@
+#frame {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  min-width: 300px;
+}
+
+.part {
+  position: inherit;
+  z-index: inherit;
+  display: inline-block;
+  background-position: center;
+}
+
+/* DIMENSIONS */
+.t1, .t2, .t3, .b1, .b2, .b3 {
+  height: 32px;
+  width: 200px;
+}
+.l1, .l2, .l3, .r1, .r2, .r3 {
+  height: 200px;
+  width: 32px;
+}
+
+/* CORNERS */
+
+/* PARTS CENTER */
+.t2, .b2 {
+  z-index: -2;
+  background-repeat: repeat-x;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 400px);
+}
+.l2, .r2 {
+  z-index: -2;
+  background-repeat: repeat-y;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 400px);
+}
+
+/* SPECIFICS */
+.t1, .t2, .t3, .l1 {
+  top: 0;
+}
+.r1, .r2, .r3, .t3, .b3 {
+  right: 0;
+}
+.b1, .b2, .b3, .l3, .r3 {
+  bottom: 0;
+}
+.l1, .l2, .l3, .t1, .b1 {
+  left: 0;
+}
+
+/* BOX SHADOW PER GRUOPS */
+.t1, .t2, .t3 {
+  box-shadow: 0px 3px 0px 0px rgba(192, 185, 185, 0.219);
+}
+
+/* INDIVIDUAL */
+.t1 {
+  background-image: url('/decoration/frame/t1.png');
+}
+.t2 {
+  background-image: url('/decoration/frame/t2.png');
+}
+.t3 {
+  background-image: url('/decoration/frame/t3.png');
+}
+.r1 {
+  background-image: url('/decoration/frame/r1.png');
+}
+.r2 {
+  background-image: url('/decoration/frame/r2.png');
+}
+.r3 {
+  background-image: url('/decoration/frame/r3.png');
+}
+.b1 {
+  background-image: url('/decoration/frame/b1.png');
+}
+.b2 {
+  background-image: url('/decoration/frame/b2.png');
+}
+.b3 {
+  background-image: url('/decoration/frame/b3.png');
+}
+.l1 {
+  background-image: url('/decoration/frame/l1.png');
+}
+.l2 {
+  background-image: url('/decoration/frame/l2.png');
+}
+.l3 {
+  background-image: url('/decoration/frame/l3.png');
+}
