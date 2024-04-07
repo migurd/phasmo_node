@@ -1,0 +1,60 @@
+.createGhost, .updateGhost {
+  height: 300px;
+  width: 100%;
+  overflow-y: auto;
+
+  .fields {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .form-group__pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100px;
+  }
+
+  img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 1px solid black;
+    background-color: #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .pic-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .btnCreateGhost {
+    text-align: center;
+  }
+}
+

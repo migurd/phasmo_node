@@ -27,7 +27,7 @@ export const ghost_db = {
   getGhosts: function(): Promise<IGhost[]> {
     return new Promise((resolve, reject) => {
       // query
-      const sqlQuery = "SELECT * FROM ghost";
+      const sqlQuery = "SELECT * FROM ghost order by status desc;";
 
       getConnection().query(
         sqlQuery,
@@ -80,13 +80,15 @@ export const ghost_db = {
       FROM
         ghost g
       LEFT JOIN
-          user_has_ghost ug ON g.id_ghost = ug.ghost_id_ghost and ug.user_id_user = ?
+        user_has_ghost ug ON g.id_ghost = ug.ghost_id_ghost and ug.user_id_user = ?
       LEFT JOIN
-          user u on u.id_user = ug.user_id_user
+        user u on u.id_user = ug.user_id_user
+      WHERE
+        g.status = 1
       GROUP BY
-          id_ghost, g.name, g.pic
+        id_ghost, g.name, g.pic
       ORDER BY
-          id_ghost;
+        id_ghost;
       `;
 
       getConnection().query(

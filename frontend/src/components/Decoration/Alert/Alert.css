@@ -8,8 +8,9 @@
   align-items: center;
   gap: 20px;
   transform: translate(-50%, -50%);
+  height: 500px;
   width: min(70%, 350px);
-  min-height: 300px;
+  max-width: 250px;
   background-color: #fffef2;
   padding: 30px;
   overflow: hidden;
@@ -17,6 +18,19 @@
   transition: ease-in;
   background-image: 
   repeating-linear-gradient(0deg, transparent, transparent 20px, #0000ff34 22px, #0000ff34 23px); /* Horizontal lines with slightly thicker blue lines */
+
+  @media screen and (min-width: 300px) {
+    max-width: 250px;
+  }
+
+  @media screen and (min-width: 500px) {
+    max-width: 350px;
+  }
+
+  @media screen and (min-width: 800px) {
+    max-width: 600px;
+  }
+
 }
 
 .pin {

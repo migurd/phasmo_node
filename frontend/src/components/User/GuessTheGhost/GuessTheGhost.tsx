@@ -5,7 +5,7 @@ import IUserHasGhost from '../../../../../backend/src/Models/UserHasGhost'
 import { IUser } from '../../../../../backend/src/Models/User'
 import Button from '../../Decoration/Button/Button';
 import Alert from '../../Decoration/Alert/Alert';
-import { getAmountGhosts, getGhost, postUserHasGhost } from '../../../consumers/AdminApi'
+import { getAmountGhosts, getGhost, getGhosts, postUserHasGhost } from '../../../consumers/AdminApi'
 import { getIdUser, getUser, updateUser } from '../../../consumers/UserApi';
 
 export default function GuessTheGhost() {
@@ -26,22 +26,24 @@ export default function GuessTheGhost() {
     setUserGuess(-1);
     try {
       const amountGhosts = await getAmountGhosts();
-  
-      let newGhostList: any[] = [];
+      const ghostList = await getGhosts();
+
+      let newGhostList: IGhost[] = [];
       let numbersGenerated: number[] = [];
-  
+
       for (let i = 0; i < 4; i++) {
-        let numGenerated = getRandomNumber(1, amountGhosts);
-        if (!numbersGenerated.includes(numGenerated)) {
-          newGhostList.push(await getGhost(numGenerated));
+        let numGenerated = getRandomNumber(0, amountGhosts - 1);
+        if (!numbersGenerated.includes(numGenerated) && ghostList[numGenerated].status !== 0) {
+          newGhostList.push(ghostList[numGenerated]);
           numbersGenerated.push(numGenerated);
+        } else {
+          i--;
         }
-        else i--;
       }
       setGhostList(newGhostList);
-      setCorrectGhost(getRandomNumber(0, 3));
+      setCorrectGhost(getRandomNumber(0, newGhostList.length - 1));
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error ocurred:', error);
     }
   };
 
@@ -105,25 +107,29 @@ export default function GuessTheGhost() {
 
   return (
     <div id="guessTheGhost">
-      <div className="ghosts">
-        <div
-          className="rightGhost"
-          style={ { backgroundImage: `url("${ghostList[correctGhost]?.pic}")` } }
-        ></div>
-        {ghostList.map((ghost, idx) => (
-          <div
-            key={ghost.id_ghost}
-            onClick={() => setUserGuess(idx)}
-            className={idx === userGuess ? "active" : ""}
-          >
-            <p>{ghost.name}</p>
+      {ghostList ?
+        <>
+          <div className="ghosts">
+            <div
+              className="rightGhost"
+              style={ { backgroundImage: `url("${ghostList[correctGhost]?.pic}")` } }
+            ></div>
+            {ghostList.map((ghost, idx) => (
+              <div
+                key={ghost.id_ghost}
+                onClick={() => setUserGuess(idx)}
+                className={idx === userGuess ? "active" : ""}
+              >
+                <p>{ghost.name}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="btnGuessTheGhost">
-        <Button button={ { name: 'Guess', type: 5, onClick: guessGhost } } />
-      </div>
-      <Alert alert={ { depth: 2, title: title, message: message, isVisible: isVisible, height: 200, onClick: () => { setIsVisible(false); newGame(); } } } />
+          <div className="btnGuessTheGhost">
+            <Button button={ { name: 'Guess', type: 5, onClick: guessGhost } } />
+          </div>
+        </> : <h2>There're not enough ghosts. :^</h2>
+      }
+      <Alert alert={ { depth: 2, title: title, message: message,  height: 300, width: 250, isVisible: isVisible, onClick: () => { setIsVisible(false); newGame(); } } } />
     </div>
   )
 }

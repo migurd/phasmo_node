@@ -1,0 +1,79 @@
+#readGhost {
+  height: 300px;
+  overflow-y: auto;
+  background-color: #cccccc44;
+
+  /* Style for the ghost table */
+  table.ghosts {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-y: auto;
+  }
+
+  table.ghosts thead {
+    width: 100%;
+    font-weight: bold;
+  }
+
+  table.ghosts tr {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Style for table rows */
+  table.ghosts tr {
+    border-bottom: 1px solid black;
+  }
+
+  table.ghosts tr.inactive {
+    background-color: #ee8c8c44;
+  }
+
+  table.ghosts tbody tr:hover {
+    transition: ease-in 0.1s;
+    background-color: #cccccca2;
+  }
+
+  /* Style for table cells */
+  table.ghosts td {
+    padding: 10px;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  /* Style for the last cell in each row */
+  table.ghosts td:last-child {
+    border-right: none;
+    display: none;
+  }
+
+  /* Style for the ghost image */
+  table.ghosts img {
+    max-width: 70px; /* Adjust as needed */
+    max-height: 70px; /* Adjust as needed */
+  }
+
+  @media screen and (min-width: 500px) {
+    table.ghosts tr {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    table.ghosts tbody td, 
+    table.ghosts thead td {
+      white-space: wrap;
+      overflow: hidden; /* Hide overflow text */
+      text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+    }
+    table.ghosts tbody td {
+      height: 100px;
+    }
+    table.ghosts td:last-child {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    table.ghosts tbody td {
+      height: auto;
+    }
+  }
+}

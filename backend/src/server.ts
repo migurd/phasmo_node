@@ -17,7 +17,7 @@ const session = require('express-session');
 main.use(express.json());
 main.use(bodyParser.urlencoded({ extended: true }));
 main.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: ["http://localhost"],
   methods: ["GET", "POST", "PUT"],
   credentials: true,
 }));

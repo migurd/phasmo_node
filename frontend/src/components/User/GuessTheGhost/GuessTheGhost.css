@@ -4,54 +4,54 @@
   width: 100%;
   margin: 10px 0px;
   padding: 10px 0px;
-}
 
-.ghosts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  height: 200px;
-  width: 100%;
-}
-
-.ghosts > *:not(.rightGhost) {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #fafafa71;
-  cursor: pointer;
-}
-
-.ghosts > *:not(.rightGhost).active {
-  background-color: #d4824b71;
-}
-
-.ghosts > *:not(.rightGhost):hover {
-  cursor: pointer;
-  filter: brightness(90%);
-}
-
-.rightGhost {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%);
-  width: 150px;
-  height: 150px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 20%;
-  user-select: none;
-  pointer-events: none;
-  touch-action: none;
-}
-
-.ghosts > * {
-  display: grid;
-  place-items: center;
-}
-
-.btnGuessTheGhost {
-  margin-top: 10px;
+  .ghosts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 200px;
+    width: 100%;
+  }
+  
+  .ghosts > *:not(.rightGhost) {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #fafafa71;
+    cursor: pointer;
+  }
+  
+  .ghosts > *:not(.rightGhost).active {
+    background-color: #d4824b71;
+  }
+  
+  .ghosts > *:not(.rightGhost):hover {
+    cursor: pointer;
+    filter: brightness(90%);
+  }
+  
+  .rightGhost {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 20%;
+    user-select: none;
+    pointer-events: none;
+    touch-action: none;
+  }
+  
+  .ghosts > * {
+    display: grid;
+    place-items: center;
+  }
+  
+  .btnGuessTheGhost {
+    margin-top: 10px;
+  }
 }

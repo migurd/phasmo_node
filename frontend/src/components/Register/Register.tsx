@@ -11,12 +11,20 @@ export default function Register() {
   const [message, setMessage] = useState("")
   const [title, setTitle] = useState("")
   const [isVisible, setIsVisible] = useState(false)
+  const [isReload, setIsReload] = useState(false)
 
   const btnRegister = async () => {
-    await register(usernameReg, passwordReg);
-    setTitle(`Welcome ${usernameReg}!`);
-    setMessage(`Created account successfully. Starting session!`);
-    setIsVisible(true)
+    try {
+      await register(usernameReg, passwordReg);
+      setTitle(`Welcome ${usernameReg}!`);
+      setMessage(`Created account successfully. Starting session!`);
+      setIsReload(true);
+    } catch (error: any) {
+      setTitle(`Error`);
+      setMessage(error.response?.data.message);
+      setIsReload(false);
+    }
+    setIsVisible(true);
   }
 
   return(
@@ -47,7 +55,7 @@ export default function Register() {
           />
         </div>
         <Button button={ { name: "Register", type: 3, onClick: btnRegister } } />
-        <Alert alert={ { depth: 1, title: title, message: message, isVisible: isVisible, isReload: true, onClick: () => { login(usernameReg, passwordReg); } } } />
+        <Alert alert={ { depth: 1, title: title, message: message, height: 250, width: 300, isVisible: isVisible, isReload: isReload, onClick: () => { isReload ? login(usernameReg, passwordReg) : () => {} } } } />
       </div>
     </>
   )

@@ -12,12 +12,20 @@ export default function Login() {
   const [message, setMessage] = useState("")
   const [title, setTitle] = useState("")
   const [isVisible, setIsVisible] = useState(false)
+  const [isReload, setIsReload] = useState(false)
 
   const btnLogin = async () => {
-    await login(username, password);
-    setTitle(`Welcome in, ${username}!`);
-    setMessage(`You've started a session successfully!`);
-    setIsVisible(true)
+    try {
+      await login(username, password);
+      setIsReload(true);
+      setTitle(`Welcome in, ${username}!`);
+      setMessage(`You've started a session successfully!`);
+    } catch (error: any) {
+      setTitle(`Error`);
+      setMessage(error.response?.data.message);
+      setIsReload(false);
+    }
+    setIsVisible(true);
   }
 
   return(
@@ -49,7 +57,7 @@ export default function Login() {
           />
         </div>
         <Button button={ { name: "Login", type: 3, onClick: btnLogin } } />
-        <Alert alert={ { depth: 1, title: title, message: message, isVisible: isVisible, isReload: true, onClick: () => { setIsVisible(false); window.location.href = '/'; } } } />
+        <Alert alert={ { depth: 1, title: title, message: message, height: 250, width: 300, isVisible: isVisible, isReload: isReload, onClick: () => { setIsVisible(false); } } } />
       </div>
     </>
   )
