@@ -1,8 +1,7 @@
 // FUNCTIONALITIES
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Navigate, Route, Router, Routes, useRoutes } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router'
 import { Role } from '../../backend/src/Models/enums'
 // MODULES
 import Login from './components/Login/Login'

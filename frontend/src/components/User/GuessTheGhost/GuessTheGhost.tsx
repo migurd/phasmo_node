@@ -5,7 +5,7 @@ import IUserHasGhost from '../../../../../backend/src/Models/UserHasGhost'
 import { IUser } from '../../../../../backend/src/Models/User'
 import Button from '../../Decoration/Button/Button';
 import Alert from '../../Decoration/Alert/Alert';
-import { getAmountGhosts, getGhost, getGhosts, postUserHasGhost } from '../../../consumers/AdminApi'
+import { getAmountGhosts, getGhosts, postUserHasGhost } from '../../../consumers/AdminApi'
 import { getIdUser, getUser, updateUser } from '../../../consumers/UserApi';
 
 export default function GuessTheGhost() {

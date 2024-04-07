@@ -91,7 +91,7 @@ export const updateUser = (updatedUser: Partial<IUser>): Promise<void> => {
       level: updatedUser.level,
       status: updatedUser.status,
     })
-      .then((response) => {
+      .then(() => {
         // console.log(response?.data.status);
         resolve();
       })

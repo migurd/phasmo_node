@@ -91,7 +91,7 @@ export const postUserHasGhost = (userHasGhost: IUserHasGhost): Promise<void> => 
       isDiscovered: userHasGhost.isDiscovered,
       isDead: userHasGhost.isDead,
     })
-      .then((response) => {
+      .then(() => {
         // console.log(response?.data.status);
         resolve();
       })
