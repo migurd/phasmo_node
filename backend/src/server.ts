@@ -1,10 +1,11 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { router } from './Routes/index'
+import { router } from './Routes/index';
+import path from 'path';
 
 // DOTENV
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, "../.env") });
 
 // CONST
 const main: Express = express();

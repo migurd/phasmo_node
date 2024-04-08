@@ -1,8 +1,9 @@
 import mysql from 'mysql2';
 import dotenv from "dotenv";
+import path from 'path';
 
 // DOTENV
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 // Singleton design pattern was implemented successfully!
 let connection: any;
