@@ -31,7 +31,7 @@ export default function ReadGhost({ onClick } : { onClick?: (ghost: IGhost) => v
         </thead>
         <tbody>
           {ghostList ? ghostList.map((ghost, idx) => (
-            <tr className={ghost && ghost.status === 0 ? 'inactive' : ''} key={idx} onClick={() => { onClick && ghost.id_ghost && setChosenGhost(idx+1); setIsVisible(true); }}>
+            <tr className={`${ghost && ghost.status === 0 ? 'inactive' : ''} ${onClick ? 'clickable' : ''}`} key={idx} onClick={() => { onClick && ghost.id_ghost && setChosenGhost(idx+1); setIsVisible(true); }}>
               {ghost.pic && <td><img src={ghost.pic} alt={ghost.name} /></td>}
               <td>{ghost.name}</td>
               <td>{ghost.description}</td>

@@ -53,6 +53,10 @@
     max-height: 70px; /* Adjust as needed */
   }
 
+  .clickable {
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 500px) {
     table.ghosts tr {
       grid-template-columns: repeat(3, 1fr);
