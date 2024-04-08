@@ -1,0 +1,32 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Adjust the version as needed
+      
+      - name: Saving SSH key
+        run: |
+          echo "${{ secrets.PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          ssh-keygen -y -f key.pem
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER }}
+
+      - name: Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -i key.pem admin@${{ secrets.DEPLOY_SERVER }} "cd phasmo_node && ./deploy.sh" || exit 1

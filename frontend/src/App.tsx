@@ -56,6 +56,10 @@ export default function App() {
     { title: "Register", path: "/register", element: <Register /> },
   ]
 
+  useEffect(() => {
+    document.title = 'Phasmo App';
+  }, []);
+
   return (
     <div className="App">
       <Background />

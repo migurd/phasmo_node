@@ -1,13 +1,17 @@
 import mysql from 'mysql2';
+import dotenv from "dotenv";
+
+// DOTENV
+dotenv.config();
 
 // Singleton design pattern was implemented successfully!
 let connection: any;
 
 function createConnection() {
 	connection = mysql.createConnection({
-		host: "127.0.0.1",
-		user: "root",
-		password: "", // passwdn't
+		host: process.env.DB_HOST,
+		user: process.env.DB_USER,
+		password: process.env.DB_PASSWORD, // passwdn't
 		database: "phasmo_db"
 	});
 

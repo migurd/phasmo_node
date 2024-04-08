@@ -3,7 +3,7 @@ import Button from "../../Decoration/Button/Button";
 import Alert from '../../Decoration/Alert/Alert';
 import CreateGhost from '../CreateGhost/CreateGhost';
 import ReadGhost from '../ReadGhost/ReadGhost';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signOut } from '../../../consumers/UserApi';
 
 export default function AdminMenu() {
@@ -59,6 +59,10 @@ export default function AdminMenu() {
     setIsVisible(true);
     setIsReload(false);
   }
+
+  useEffect(() => {
+    document.title = 'Phasmo Admin';
+  }, []);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import Alert from "../../Decoration/Alert/Alert";
 import Button from "../../Decoration/Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GuessTheGhost from "../GuessTheGhost/GuessTheGhost";
 import { signOut } from "../../../consumers/UserApi";
 import ReadHistory from "../ReadHistory/ReadHistory";
@@ -67,6 +67,10 @@ export default function UserMenu() {
     setIsVisible(true);
     setIsReload(false);
   }
+
+  useEffect(() => {
+    document.title = 'Phasmo User';
+  }, []);
 
   return (
     <>
